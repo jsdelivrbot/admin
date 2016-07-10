@@ -1,0 +1,116 @@
+ <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+      <div class="pull-left image">
+        <img src="{{ get_profile_image()}}" class="img-circle" alt="User Image" />
+      </div>
+      <div class="pull-left info">
+        <p>{{ app.user.username}}</p>
+
+        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+      </div>
+    </div>
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+      <li class="header">MENU PRINCIPAL</li>
+      
+      {% if app.user.isGranted('ROLE_ADMIN') %}
+          
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>{{ 'dashboard' | trans }}</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li id="section-analitycs"><a href="{{ path('admin_default_analitycs')}}"><i class="fa fa-circle-o"></i> Google Analitycs</a></li>
+            <li id="section-menuitems"><a href="{{ path('core_menuitem_index') }}"><i class="fa fa-circle-o"></i> <span>{{ "menu.plural" | trans }}</span></a></li>
+            <li id="section-sliders"><a href="{{ path('core_slider_index') }}"><i class="fa fa-circle-o"></i> <span>{{ "slider.plural" | trans }}</span></a></li>
+          </ul>
+        </li>
+
+       {# <li class="treeview">
+          <a href="#">
+            <i class="fa fa-shopping-cart"></i> <span>Ecommerce</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <a href="#"><i class="fa fa-circle-o"></i> {{ "catalogue" | trans }} <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                  <li id="section-products"><a href="{{ path('ecommerce_product_index') }}"><i class="fa fa-circle-o"></i> {{ "product.plural" | trans }}</a></li>
+                  <li id="section-categories"><a href="{{ path('ecommerce_category_index') }}"><i class="fa fa-circle-o"></i> {{ "category.plural" | trans }}</a></li>
+                  <li id="section-features"><a href="{{ path('ecommerce_feature_index') }}"><i class="fa fa-circle-o"></i> {{ "feature.plural" | trans }}</a></li>
+                  <li id="section-brands"><a href="{{ path('ecommerce_brand_index') }}"><i class="fa fa-circle-o"></i> {{ "brand.plural" | trans }}</a></li>
+                  <li id="section-models"><a href="{{ path('ecommerce_brandmodel_index') }}"><i class="fa fa-circle-o"></i> {{ "model.plural" | trans }}</a></li>
+              </ul>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-circle-o"></i> {{ "transaction.plural" | trans }} <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                  <li id="section-transactions"><a href="{{ path('ecommerce_transaction_index') }}"><i class="fa fa-circle-o"></i> {{ "transaction.plural" | trans }}</a></li>
+                  <li id="section-invoices"><a href="{{ path('ecommerce_invoice_index') }}"><i class="fa fa-circle-o"></i> {{ "invoice.plural" | trans }}</a></li>
+                  <li id="section-taxes"><a href="{{ path('ecommerce_tax_index') }}"><i class="fa fa-circle-o"></i> {{ "tax.plural" | trans }}</a></li> 
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-circle-o"></i> {{ "recurring.plural" | trans }} <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                  <li id="section-contracts"><a href="{{ path('ecommerce_contract_index') }}"><i class="fa fa-circle-o"></i> {{ "contract.plural" | trans }}</a></li>
+                  <li id="section-plans"><a href="{{ path('ecommerce_plan_index') }}"><i class="fa fa-circle-o"></i> {{ "plan.plural" | trans }}</a></li>
+                  <li id="section-listeners"><a href="{{ path('ecommerce_listenerlog_index') }}"><i class="fa fa-circle-o"></i> {{ "listenerlog.plural" | trans }}</a></li>
+                </ul>
+            </li>
+          </ul>
+        </li>#}
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>{{ "user.plural" | trans }}</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li id="section-actors"><a href="{{ path('core_actor_index') }}"><i class="fa fa-circle-o"></i> Clientes</a></li>
+          </ul>
+        </li>
+        
+        
+        <li class="treeview">
+            <a href="#">
+                <i class="fa ion-ios-compose-outline" ></i> <span>{{ 'blog.singular'  | trans }}</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu sub-menu">
+                <li id="section-posts"><a href="{{ path('blog_post_index') }}"><i class="fa fa-circle-o"></i> {{ "post.plural" | trans }}</a></li>
+                {% if (app.user.granted('ROLE_SUPER_ADMIN') or app.user.granted('ROLE_ADMIN') ) %}<li id="section-postcategories"><a href="{{ path('blog_category_index') }}"><i class="fa fa-circle-o"></i> {{ "post.categories" | trans }}</a></li>{% endif %}
+                <li id="section-posttags"><a href="{{ path('blog_tag_index') }}"><i class="fa fa-circle-o"></i> {{ "post.tags" | trans }}</a></li>
+                <li id="section-postcomments"><a href="{{ path('blog_comment_index') }}"><i class="fa fa-circle-o"></i> {{ "comment.plural" | trans }}</a></li>
+            </ul>
+        </li>
+        
+        
+        <li class="treeview">
+              <a href="#">
+                  <i class="fa fa-envelope-o"></i> <span>{{ "newsletter.plural" | trans }}</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu sub-menu">
+                  <li id="section-subscriptions"><a href="{{ path('core_newsletter_subscription') }}">{{ "newsletter.subscripts.plural" | trans }}</a></li>
+                  <li id="section-newsletters"><a href="{{ path('core_newsletter_index') }}">{{ "newsletter.plural" | trans }}</a></li>
+                  <li id="section-shippings"><a href="{{ path('core_newsletter_shipping') }}">{{ "newsletter.shipping.plural" | trans }}</a></li>
+              </ul>
+          </li>
+          
+           {#<li class="treeview">
+                <a href="#">
+                    <i class="fa fa-picture-o" ></i> <span>{{ 'advert.plural'  | trans }}</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu sub-menu">
+                    <li id="section-adverts"><a href="{{ path('ecommerce_advert_index') }}"><i class="fa fa-circle-o"></i> {{ "advert.plural" | trans }}</a></li>
+                    <li id="section-advertslocated"><a href="{{ path('ecommerce_located_index') }}"><i class="fa fa-circle-o"></i> {{ "located.plural" | trans }}</a></li>
+                </ul>
+            </li>#}
+
+      
+        {% endif %}
+    </ul>
+  </section>

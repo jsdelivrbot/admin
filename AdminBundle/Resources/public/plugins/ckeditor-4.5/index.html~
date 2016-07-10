@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Uploaded image</title>
+    <link rel="shortcut icon" href="/bundles/front/images/favicon.ico" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+            
+     
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   
+  </head>
+    <body >
+          <textarea id="textarea"></textarea>
+    <!-- jQuery 2.1.4 -->
+    <!-- CKEDITOR -->
+    <script type="text/javascript" src="jQuery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="ckeditor.js"></script>
+    
+<script>
+    $(function () {
+       	 // Replace the <textarea id="editor1"> with a CKEditor
+         // instance, using default configuration.
+	CKEDITOR.replace( 'textarea', {
+					extraPlugins: 'uploadimage,image2',
+					height: 300,
+
+					// Upload images to a CKFinder connector (note that the response type is set to JSON).
+					uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+
+					// Configure your file manager integration. This example uses CKFinder 3 for PHP.
+					filebrowserBrowseUrl: 'http://academy2.dev/bundles/admin/plugins/ckfinder/ckfinder.html',
+					filebrowserImageBrowseUrl: 'http://academy2.dev/bundles/admin/plugins/ckfinder/ckfinder.html?type=Images',
+					filebrowserUploadUrl: 'http://academy2.dev/bundles/admin/plugins/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+					filebrowserImageUploadUrl: 'http://academy2.dev/bundles/admin/plugins/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+
+					// The following options are not necessary and are used here for presentation purposes only.
+					// They configure the Styles drop-down list and widgets to use classes.
+
+					stylesSet: [
+						{ name: 'Narrow image', type: 'widget', widget: 'image', attributes: { 'class': 'image-narrow' } },
+						{ name: 'Wide image', type: 'widget', widget: 'image', attributes: { 'class': 'image-wide' } }
+					],
+
+					// Load the default contents.css file plus customizations for this sample.
+					contentsCss: [ CKEDITOR.basePath + 'contents.css', 'assets/css/widgetstyles.css' ],
+
+					// Configure the Enhanced Image plugin to use classes instead of styles and to disable the
+					// resizer (because image size is controlled by widget styles or the image takes maximum
+					// 100% of the editor width).
+					image2_alignClasses: [ 'image-align-left', 'image-align-center', 'image-align-right' ],
+					image2_disableResizer: true
+				} );
+
+
+    });
+</script>
+     </body>
+  </html>  
+  

@@ -1,0 +1,55 @@
+parameters:
+  json_list.class: "AdminBundle\\Service\\DataTables\\JsonList"
+  admin_manager.class: "AdminBundle\\Service\\AdminManager"
+  upload_handler.class: "AdminBundle\\Service\\UploadHandler"
+
+
+services:
+    json_list:
+        class: %json_list.class%
+        arguments:
+          - "@request"
+        scope: request
+        
+    admin_manager:
+        class: %admin_manager.class%
+        arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@security.token_storage"
+          - { parameters: %core% }
+          - "@service_container"
+        
+    gedmo.listener.timestampable:
+        class: "Gedmo\\Timestampable\\TimestampableListener"
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+    gedmo.listener.sluggable:
+        class: "Gedmo\\Sluggable\\SluggableListener"
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+            
+    upload_handler:
+        class: %upload_handler.class%
+        arguments:
+            - %kernel.root_dir%
+            - "@router"
+            - "@request"
+            - "@doctrine.orm.entity_manager"
+        scope: request
+        
+    google.api.client:
+        class: "AdminBundle\\Service\\GoogleClient"
+        arguments: [%admin%]
+
+    google.api.analytics:
+        class: "AdminBundle\\Service\\AnalyticsService"
+        arguments: ["@google.api.client", "@doctrine"]
+    
+    google.api.youtube:
+        class: "AdminBundle\\Service\\YoutubeService"
+        arguments: ["@google.api.client"]
