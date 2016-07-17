@@ -62,10 +62,10 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/analitycs/{id}")
+     * @Route("/analytics/{id}")
      * @Template()
      */
-    public function analitycsAction(Request $request, $id=null)
+    public function analyticsAction(Request $request, $id=null)
     {
         
         $client = $this->get('google.api.client');
@@ -73,7 +73,7 @@ class DefaultController extends Controller
         if ($request->query->get('code') && is_null($this->get('session')->get('access_token'))) {
             $client->authenticate($request->query->get('code'));
             $this->get('session')->set('access_token', $client->getAccessToken());
-            header('Location: ' . filter_var($this->generateUrl('admin_default_analitycs'), FILTER_SANITIZE_URL));
+            header('Location: ' . filter_var($this->generateUrl('admin_default_analytics'), FILTER_SANITIZE_URL));
         }
         
         /************************************************
@@ -103,7 +103,7 @@ class DefaultController extends Controller
             if($analytics->hasAccount()){
                 list($mainResult, $reportResult, $reportDay) = $analytics->getGoogleAnalitycsData($startDate, $endDate);
             
-                return $this->render("AdminBundle:Analitycs:analitycs.html.twig", array(
+                return $this->render("AdminBundle:Analytics:analytics.html.twig", array(
                         'authUrl' => $authUrl,
                         'mainResult' => $mainResult,
                         'reportResult'=> $reportResult,
@@ -113,11 +113,11 @@ class DefaultController extends Controller
                     ));
             }
             
-            return $this->render("AdminBundle:Analitycs:no.analitycs.html.twig", array());
+            return $this->render("AdminBundle:Analytics:no.analytics.html.twig", array());
             
         } else {
           $authUrl = $client->createAuthUrl();
-          return $this->render("AdminBundle:Analitycs:auth.analitycs.html.twig", array('authUrl' => $authUrl));
+          return $this->render("AdminBundle:Analytics:auth.analytics.html.twig", array('authUrl' => $authUrl));
         }
         
     }

@@ -15,8 +15,23 @@
       <li class="header">MENU PRINCIPAL</li>
       
       {% if app.user.isGranted('ROLE_ADMIN') %}
-          
-        <li class="treeview">
+        {% set admin_menu =  get_admin_menu() %}
+        {% for key, item in admin_menu %}
+            <li class="treeview">
+                <a href="#">
+                  <i class="{{item.icon_class}}"></i> <span>{{ item.label | trans }}</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                  {% for subkey, subitem in item.options %} 
+                      <li id="section-{{subkey}}">
+                          <a href="{{ path(subitem)}}"><i class="fa fa-circle-o"></i> {{ subkey | trans }}</a>
+                      </li>
+                  {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        
+        {#<li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>{{ 'dashboard' | trans }}</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
@@ -27,42 +42,6 @@
           </ul>
         </li>
 
-       {# <li class="treeview">
-          <a href="#">
-            <i class="fa fa-shopping-cart"></i> <span>Ecommerce</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a href="#"><i class="fa fa-circle-o"></i> {{ "catalogue" | trans }} <i class="fa fa-angle-left pull-right"></i></a>
-              <ul class="treeview-menu">
-                  <li id="section-products"><a href="{{ path('ecommerce_product_index') }}"><i class="fa fa-circle-o"></i> {{ "product.plural" | trans }}</a></li>
-                  <li id="section-categories"><a href="{{ path('ecommerce_category_index') }}"><i class="fa fa-circle-o"></i> {{ "category.plural" | trans }}</a></li>
-                  <li id="section-features"><a href="{{ path('ecommerce_feature_index') }}"><i class="fa fa-circle-o"></i> {{ "feature.plural" | trans }}</a></li>
-                  <li id="section-brands"><a href="{{ path('ecommerce_brand_index') }}"><i class="fa fa-circle-o"></i> {{ "brand.plural" | trans }}</a></li>
-                  <li id="section-models"><a href="{{ path('ecommerce_brandmodel_index') }}"><i class="fa fa-circle-o"></i> {{ "model.plural" | trans }}</a></li>
-              </ul>
-            </li>
-
-            <li>
-                <a href="#"><i class="fa fa-circle-o"></i> {{ "transaction.plural" | trans }} <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                  <li id="section-transactions"><a href="{{ path('ecommerce_transaction_index') }}"><i class="fa fa-circle-o"></i> {{ "transaction.plural" | trans }}</a></li>
-                  <li id="section-invoices"><a href="{{ path('ecommerce_invoice_index') }}"><i class="fa fa-circle-o"></i> {{ "invoice.plural" | trans }}</a></li>
-                  <li id="section-taxes"><a href="{{ path('ecommerce_tax_index') }}"><i class="fa fa-circle-o"></i> {{ "tax.plural" | trans }}</a></li> 
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-circle-o"></i> {{ "recurring.plural" | trans }} <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                  <li id="section-contracts"><a href="{{ path('ecommerce_contract_index') }}"><i class="fa fa-circle-o"></i> {{ "contract.plural" | trans }}</a></li>
-                  <li id="section-plans"><a href="{{ path('ecommerce_plan_index') }}"><i class="fa fa-circle-o"></i> {{ "plan.plural" | trans }}</a></li>
-                  <li id="section-listeners"><a href="{{ path('ecommerce_listenerlog_index') }}"><i class="fa fa-circle-o"></i> {{ "listenerlog.plural" | trans }}</a></li>
-                </ul>
-            </li>
-          </ul>
-        </li>#}
-
         <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i> <span>{{ "actor.plural" | trans }}</span> <i class="fa fa-angle-left pull-right"></i>
@@ -72,20 +51,7 @@
           </ul>
         </li>
         
-        
-        <li class="treeview">
-            <a href="#">
-                <i class="fa ion-ios-compose-outline" ></i> <span>{{ 'blog.singular'  | trans }}</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="treeview-menu sub-menu">
-                <li id="section-posts"><a href="{{ path('blog_post_index') }}"><i class="fa fa-circle-o"></i> {{ "post.plural" | trans }}</a></li>
-                {% if (app.user.granted('ROLE_SUPER_ADMIN') or app.user.granted('ROLE_ADMIN') ) %}<li id="section-postcategories"><a href="{{ path('blog_category_index') }}"><i class="fa fa-circle-o"></i> {{ "post.categories" | trans }}</a></li>{% endif %}
-                <li id="section-posttags"><a href="{{ path('blog_tag_index') }}"><i class="fa fa-circle-o"></i> {{ "post.tags" | trans }}</a></li>
-                <li id="section-postcomments"><a href="{{ path('blog_comment_index') }}"><i class="fa fa-circle-o"></i> {{ "comment.plural" | trans }}</a></li>
-            </ul>
-        </li>
-        
+       
         
         <li class="treeview">
               <a href="#">
@@ -99,7 +65,22 @@
               </ul>
           </li>
           
-           {#<li class="treeview">
+           
+            
+        <li class="treeview">
+            <a href="#">
+                <i class="fa ion-ios-compose-outline" ></i> <span>{{ 'blog.singular'  | trans }}</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu sub-menu">
+                <li id="section-posts"><a href="{{ path('blog_post_index') }}"><i class="fa fa-circle-o"></i> {{ "post.plural" | trans }}</a></li>
+                <li id="section-postcategories"><a href="{{ path('blog_category_index') }}"><i class="fa fa-circle-o"></i> {{ "post.categories" | trans }}</a></li>
+                <li id="section-posttags"><a href="{{ path('blog_tag_index') }}"><i class="fa fa-circle-o"></i> {{ "post.tags" | trans }}</a></li>
+                <li id="section-postcomments"><a href="{{ path('blog_comment_index') }}"><i class="fa fa-circle-o"></i> {{ "comment.plural" | trans }}</a></li>
+            </ul>
+        </li>
+        
+           <li class="treeview">
                 <a href="#">
                     <i class="fa fa-picture-o" ></i> <span>{{ 'advert.plural'  | trans }}</span>
                     <i class="fa fa-angle-left pull-right"></i>
@@ -109,8 +90,7 @@
                     <li id="section-advertslocated"><a href="{{ path('ecommerce_located_index') }}"><i class="fa fa-circle-o"></i> {{ "located.plural" | trans }}</a></li>
                 </ul>
             </li>#}
-
-      
-        {% endif %}
+           
+      {% endif %}
     </ul>
   </section>
