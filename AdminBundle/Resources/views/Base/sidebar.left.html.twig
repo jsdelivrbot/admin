@@ -24,7 +24,16 @@
                 <ul class="treeview-menu">
                   {% for subkey, subitem in item.options %} 
                       <li id="section-{{subkey}}">
-                          <a href="{{ path(subitem)}}"><i class="fa fa-circle-o"></i> {{ subkey | trans }}</a>
+                          {% if subitem.options is defined %}
+                            <a href=""><i class="fa fa-circle-o"></i> {{ subkey | trans }} </a>
+                            <ul class="treeview-menu">
+                                {% for subkey2, subitem2 in subitem.options %} 
+                                    <li id="section-{{subkey2}}"><a href="{{ path(subitem2) }}"><i class="fa fa-circle-o"></i> {{ subkey2 | trans }}</a></li>
+                                {% endfor %}
+                            </ul>
+                          {% else %}
+                              <a href="{{ path(subitem) }}"><i class="fa fa-circle-o"></i> {{ subkey | trans }} </a>
+                          {% endif %}
                       </li>
                   {% endfor %}
                 </ul>

@@ -291,6 +291,14 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     margin-top: -10px;
     display: block;
 }
+#create-address .form-group{
+    margin: 0!important;
+}
+#create-address .col-md-3, #create-address .col-md-4, #create-address .col-md-5, #create-address .col-md-6 {
+    padding-right: 7px;
+    padding-left: 7px;
+}
+
 .advert-table.total tr.header{
     
 }
