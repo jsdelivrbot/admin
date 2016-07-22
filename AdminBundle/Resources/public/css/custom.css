@@ -63,10 +63,15 @@
 .transaction-show-tables  table td {
   border-top: 0!important;
 }
-.show-tables table td:first-child {
+.show-tables table.table>tbody>tr>td:first-child {
   font-weight: bold;
   text-align: right;
   width: 5%;
+}
+.show-tables table.dataTable td:first-child {
+  font-weight: normal!important;
+  text-align: left!important;
+  width: auto!important;
 }
 .show-tables  table td {
   border-top: 0!important;
@@ -125,44 +130,15 @@ input[type="file"] {
 .my-colorpicker input{
     width: 150px!important;
 }
-
 .message-box{
     overflow: hidden;
      display: none; 
-/*    position: absolute;*/
     width: 100%;
     padding: 10px 15px;
     font-size: 13px;
     background-color: #fcf8e3;
     border: 1px solid #f5e79e;
     text-align: justify;
-}
-
-.optic-dashboard-tabs{
-    background: none!important;
-}
-.optic-dashboard-tabs>.tab-content {
-    background: none!important; 
-    padding: 1px 0 0 0;
-}
-.optic-dashboard-tabs>.nav-tabs>li.active>a, .optic-dashboard-tabs>.nav-tabs>li.active:hover>a {
-    background-color: transparent !important; 
-}
-.optic-dashboard-tabs>.nav-tabs>li.bg-teal-gradient{
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #7adddd), color-stop(1, #39cccc)) !important;
-}
-.optic-dashboard-tabs>.nav-tabs>li.bg-green-gradient{
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #00ca6d), color-stop(1, #00a65a)) !important;
-}
-.optic-dashboard-tabs>.nav-tabs>li.bg-purple-gradient{
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #9491c4), color-stop(1, #605ca8)) !important;
-}
-.optic-dashboard-tabs>.nav-tabs>li>a, 
-.optic-dashboard-tabs>.nav-tabs>li:hover>a
-.optic-dashboard-tabs>.nav-tabs>li:hover>a:hover
-.optic-dashboard-tabs>.nav-tabs>li.active>a, 
-.optic-dashboard-tabs>.nav-tabs>li.active:hover>a{
-    color: #f1f1f1!important;
 }
 .container-send{
     padding: 10px;
@@ -297,17 +273,4 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 #create-address .col-md-3, #create-address .col-md-4, #create-address .col-md-5, #create-address .col-md-6 {
     padding-right: 7px;
     padding-left: 7px;
-}
-
-.advert-table.total tr.header{
-    
-}
-.advert-table.total tr.subtotal{
-    
-}
-.advert-table.total tr.discount{
-    
-}
-.advert-table.total tr.vat{
-    
 }
