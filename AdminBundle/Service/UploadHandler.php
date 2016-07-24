@@ -79,6 +79,7 @@ class UploadHandler
                         'entity' => $request->get('entity'),
                         'image_entity' => $request->get('image_entity')
                     ), true),
+            'type' => $request->get('type'),
             'upload_dir' => $rootDir.'/../web/uploads/images/'.$request->get('type').'/'.$request->get('id').'/',
             'upload_url' => $this->get_full_url().'/uploads/images/'.$request->get('type').'/'.$request->get('id').'/',
             'entity_id' => $request->get('id'),
@@ -983,7 +984,7 @@ class UploadHandler
                 }elseif($this->options['entity_path'] == 'EcommerceBundle:Product'){
                     $image = new ProductImage();
                 }
-                $image->setPath('/uploads/images/post/'.$entity->getId().'/'.$files[$index]->name);
+                $image->setPath('/uploads/images/'.$this->options['type'].'/'.$entity->getId().'/'.$files[$index]->name);
                 $this->entityManager->persist($image);
 
                 $entity->addImage($image);
@@ -1011,6 +1012,7 @@ class UploadHandler
                         if(preg_match('/\.png/', $files[$index]->name)) $arr = explode('.png', $files[$index]->name);
                         $img_name = $arr[0];
                     }
+                    $this->resizeImage($source, $img_name.'_400', 400, 250);
                     $this->resizeImage($source, $img_name.'_380', 380, 180);
                     $this->resizeImage($source, $img_name.'_260', 260, 123);
                     $this->resizeImage($source, $img_name.'_142', 142, 88);
