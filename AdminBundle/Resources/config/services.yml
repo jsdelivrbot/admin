@@ -44,7 +44,7 @@ services:
         
     google.api.client:
         class: "AdminBundle\\Service\\GoogleClient"
-        arguments: [%admin%]
+        arguments: ["%google_analytics.application_name%", "%google_analytics.oauth2_client_id%", "%google_analytics.oauth2_client_secret%", "%google_analytics.oauth2_redirect_uri%", "%google_analytics.developer_key%"]
 
     google.api.analytics:
         class: "AdminBundle\\Service\\AnalyticsService"

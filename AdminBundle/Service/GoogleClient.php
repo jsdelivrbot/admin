@@ -15,28 +15,24 @@ class GoogleClient
     protected $client;
 
     /**
-     * @param array $config
+     * @param string $applicationName
+     * @param string $clientId
+     * @param string $secret
+     * @param string $redirectUri
+     * @param string $developerKey
      */
-    public function __construct(array $config)
+    public function __construct($applicationName, $clientId, $secret, $redirectUri, $developerKey)
     {
         // True if objects should be returned by the service classes.
         // False if associative arrays should be returned (default behavior).
         $config['use_objects'] = true;
 
-        $configuration = array();
-        foreach ($config as $value) {
-            if(is_array($value)){
-                foreach ($value as $k => $v) {
-                    $configuration[$k] = $v;
-                }
-            }
-        }
         $client = new \Google_Client($config);
-        $client->setApplicationName($configuration['google_application_name']);
-        $client->setClientId($configuration['google_oauth2_client_id']);
-        $client->setClientSecret($configuration['google_oauth2_client_secret']);
-        $client->setRedirectUri($configuration['google_oauth2_redirect_uri']);
-        $client->setDeveloperKey($configuration['google_developer_key']);
+        $client->setApplicationName($applicationName);
+        $client->setClientId($clientId);
+        $client->setClientSecret($secret);
+        $client->setRedirectUri($redirectUri);
+        $client->setDeveloperKey($developerKey);
         $client->setScopes(array('https://www.googleapis.com/auth/analytics.readonly'));
         
         $this -> client = $client;

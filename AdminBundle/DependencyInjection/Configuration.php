@@ -20,29 +20,46 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('admin');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
-//        $rootNode
-//          ->children()
-//            ->scalarNode('google_application_name')->isRequired()->cannotBeEmpty()->end()
-//            ->scalarNode('google_oauth2_client_id')->isRequired()->cannotBeEmpty()->end()
-//            ->scalarNode('google_oauth2_client_secret')->isRequired()->cannotBeEmpty()->end()
-//            ->scalarNode('google_oauth2_redirect_uri')->isRequired()->cannotBeEmpty()->end()
-//            ->scalarNode('google_developer_key')->isRequired()->cannotBeEmpty()->end()
-//            ->scalarNode('google_site_name')->isRequired()->cannotBeEmpty()->end()
-//
-//            ->scalarNode('authClass')->end()
-//            ->scalarNode('ioClass')->end()
-//            ->scalarNode('cacheClass')->end()
-//            ->scalarNode('basePath')->end()
-//            ->scalarNode('ioFileCache_directory')->end()
-//          //end rootnode children
-//          ->end();
-
-        //let use the api defaults
-        //$this->addServicesSection($rootNode);
-//
+        $rootNode
+            ->children()
+                ->arrayNode('admin_menus')
+                    ->isRequired()
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->ignoreExtraKeys()
+                        ->children()
+                            ->scalarNode('icon_class')->defaultNull()->end()
+                            ->scalarNode('label')->defaultNull()->end()
+                            ->arrayNode('options')
+                                ->useAttributeAsKey('name')
+                                ->prototype('array')
+                                    ->ignoreExtraKeys()
+                                    ->children()
+                                        ->scalarNode('icon_class')->defaultNull()->end()
+                                        ->scalarNode('label')->defaultNull()->end()
+                                        ->arrayNode('options')
+                                            ->useAttributeAsKey('name')
+                                            ->prototype('scalar')->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('apis')
+                    ->isRequired()
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->ignoreExtraKeys()
+                        ->children()
+                            ->arrayNode('options')
+                            ->useAttributeAsKey('name')
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
         return $treeBuilder;
     }
 }
