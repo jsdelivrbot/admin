@@ -274,3 +274,9 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     padding-right: 7px;
     padding-left: 7px;
 }
+.form-group ul#credential-fields-list{
+    color: #333 !important;
+}
+.form-group ul#credential-fields-list li{
+    overflow: hidden
+}

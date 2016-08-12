@@ -135,6 +135,7 @@ class AdminExtension extends Extension
                                     'transactions' => 'ecommerce_transaction_index',
                                     'invoices' => 'ecommerce_invoice_index',
                                     'taxes' => 'ecommerce_tax_index',
+                                    'paymentserviceproviders' => 'ecommerce_paymentserviceprovider_index',
                                 )
                             ),
                             'recurrings' => array(
