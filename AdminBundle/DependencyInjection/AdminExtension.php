@@ -64,7 +64,13 @@ class AdminExtension extends Extension
                         'label' => 'dashboard',
                         'options' => array(
                             'menuitems' => 'core_menuitem_index',
-                            'sliders' => 'core_slider_index'
+                            'sliders' => 'core_slider_index',
+                            'fonts' => array(
+                                'options' => array(
+                                    'fontadds' => 'core_font_index',
+                                    'fontless' => 'core_font_less',
+                                )
+                            )
                         )
                      ),
                     'user' => array(
