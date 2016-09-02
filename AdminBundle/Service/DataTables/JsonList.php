@@ -45,6 +45,9 @@ class JsonList
     /** @var EntityId entity */
     protected $advertId=null;
     
+    /** @var string  */
+    protected $locale;
+    
     /**
      * Constructor
      *
@@ -113,6 +116,16 @@ class JsonList
     }
     
     /**
+     * Set the locale
+     *
+     * @param ObjectRepository $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+    
+    /**
      * Get the list
      *
      * @return array
@@ -125,13 +138,13 @@ class JsonList
         if(!is_null($this->category)){
             $entities = $this->repository->findAllForDataTablesByCategory($this->search, $this->sortColumn, $this->sortDirection, $this->category);
         }elseif(!is_null($this->entityId)){
-            $entities = $this->repository->findAllForDataTables($this->search, $this->sortColumn, $this->sortDirection, $this->entityId);
+            $entities = $this->repository->findAllForDataTables($this->search, $this->sortColumn, $this->sortDirection, $this->entityId, $this->locale);
         }elseif(!is_null($this->agreementId)){
             $entities = $this->repository->findByAgreementForDataTables($this->search, $this->sortColumn, $this->sortDirection, $this->agreementId);
         }elseif(!is_null($this->advertId)){
             $entities = $this->repository->findByAdvertForDataTables($this->search, $this->sortColumn, $this->sortDirection, $this->advertId);
         }else{
-            $entities = $this->repository->findAllForDataTables($this->search, $this->sortColumn, $this->sortDirection);
+            $entities = $this->repository->findAllForDataTables($this->search, $this->sortColumn, $this->sortDirection, null, $this->locale);
         }
          
         $totalFilteredEntities = count($entities->getScalarResult());
