@@ -104,9 +104,8 @@
 
 {% block javascripts %}
     {{parent()}}
-    <!-- fullCalendar 2.2.5 -->
+    <!-- fullCalendar 2.2.5 AND 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js'-->
     {% javascripts 
-        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js'
         'bundles/admin/plugins/fullcalendar/fullcalendar.min.js'
          %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
