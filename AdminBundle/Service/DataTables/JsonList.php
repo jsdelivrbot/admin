@@ -4,6 +4,7 @@ namespace AdminBundle\Service\DataTables;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class JsonList
@@ -48,19 +49,22 @@ class JsonList
     /** @var string  */
     protected $locale;
     
+    protected $request;
+    
     /**
      * Constructor
      *
-     * @param Request $request
+     * @param RequestStack $requestStack
      */
-    public function __construct(Request $request)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->offset = intval($request->get('iDisplayStart'));
-        $this->limit = intval($request->get('iDisplayLength'));
-        $this->sortColumn = intval($request->get('iSortCol_0'));
-        $this->sortDirection = $request->get('sSortDir_0');
-        $this->search = $request->get('sSearch');
-        $this->echo = intval($request->get('sEcho'));
+        $this->request = $requestStack->getCurrentRequest();;
+        $this->offset = intval($this->request->get('iDisplayStart'));
+        $this->limit = intval($this->request->get('iDisplayLength'));
+        $this->sortColumn = intval($this->request->get('iSortCol_0'));
+        $this->sortDirection = $this->request->get('sSortDir_0');
+        $this->search = $this->request->get('sSearch');
+        $this->echo = intval($this->request->get('sEcho'));
 
         return $this;
     }

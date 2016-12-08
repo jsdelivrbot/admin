@@ -18,8 +18,7 @@ use Symfony\Component\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
 use CoreBundle\Entity\Image as ProductImage;
 use BlogBundle\Entity\Image as PostImage;
-use CoreBundle\Entity\Project;
-
+use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Class UploadHandler
  *
@@ -33,6 +32,9 @@ class UploadHandler
     private $entityManager;
 
     protected $options;
+    
+    protected $request;
+    
     // PHP File Upload error message codes:
     // http://php.net/manual/en/features.file-upload.errors.php
     protected $error_messages = array(
@@ -66,26 +68,26 @@ class UploadHandler
      * @param bool          $initialize    Initialize flag
      * @param array|null    $errorMessages Error messages
      */
-    public function __construct($rootDir, Router $router, Request $request, EntityManager $entityManager, $options = null, $initialize = true, $errorMessages = null)
+    public function __construct($rootDir, Router $router, RequestStack $requestStack, EntityManager $entityManager, $options = null, $initialize = true, $errorMessages = null)
     {
         $this->entityManager = $entityManager;
-
+        $this->request = $requestStack->getCurrentRequest();
         $this->options = array(
-            'script_url' => $router->generate($request->get('route'), array(
-                        'id' => $request->get('id'), 
-                        'slug' => $request->get('slug'), 
-                        'type' => $request->get('type'), 
-                        'route' => $request->get('route'),
-                        'entity' => $request->get('entity'),
-                        'image_entity' => $request->get('image_entity')
+            'script_url' => $router->generate($this->request->get('route'), array(
+                        'id' => $this->request->get('id'), 
+                        'slug' => $this->request->get('slug'), 
+                        'type' => $this->request->get('type'), 
+                        'route' => $this->request->get('route'),
+                        'entity' => $this->request->get('entity'),
+                        'image_entity' => $this->request->get('image_entity')
                     ), true),
-            'type' => $request->get('type'),
-            'upload_dir' => $rootDir.'/../web/uploads/images/'.$request->get('type').'/'.$request->get('id').'/',
-            'upload_url' => $this->get_full_url().'/uploads/images/'.$request->get('type').'/'.$request->get('id').'/',
-            'entity_id' => $request->get('id'),
-            'entity_slug' => $request->get('slug'),
-            'entity_path' => $request->get('entity'),
-            'entity_image_path' => $request->get('image_entity'),
+            'type' => $this->request->get('type'),
+            'upload_dir' => $rootDir.'/../web/uploads/images/'.$this->request->get('type').'/'.$this->request->get('id').'/',
+            'upload_url' => $this->get_full_url().'/uploads/images/'.$this->request->get('type').'/'.$this->request->get('id').'/',
+            'entity_id' => $this->request->get('id'),
+            'entity_slug' => $this->request->get('slug'),
+            'entity_path' => $this->request->get('entity'),
+            'entity_image_path' => $this->request->get('image_entity'),
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',
