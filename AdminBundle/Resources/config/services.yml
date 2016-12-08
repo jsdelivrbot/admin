@@ -9,7 +9,7 @@ services:
         class: %json_list.class%
         arguments:
           - "@request_stack"
-        scope: request
+        scope: request_stack
         
     admin_manager:
         class: %admin_manager.class%

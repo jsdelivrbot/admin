@@ -20,8 +20,8 @@ class DefaultController extends Controller
      */
     public function getDataTablesI18nAction()
     {
-        $locale = $this->get('request')->getLocale();
-        $format = $this->get('request')->getRequestFormat();
+        $locale = $this->get('request_stack')->getCurrentRequest()->getLocale();
+        $format = $this->get('request_stack')->getCurrentRequest()->getRequestFormat();
 
         return $this->render(
             'AdminBundle:Default/DataTables_i18n:'.$locale.'.txt.'.$format
