@@ -176,12 +176,30 @@ class AdminExtension extends Extension
                             $arr2[$key][$key2] = $menu_item2;
                         }else{
                             foreach ($menu_item2 as $key3 => $menu_item3) {
-                                $arr2[$key][$key2][$key3] = array_merge($arr2[$key][$key2][$key3], $menu_item3);
+                                if(is_array($arr2[$key][$key2][$key3])){
+                                    $customOptions = $arr2[$key][$key2][$key3];
+                                    //if we need remove items put values as null
+                                    $arr2[$key][$key2][$key3] = $this->cleanOptionsNull($customOptions, $menu_item3);
+                                }
                             }
                         }
                     }
                 }
             }
         return $arr2;
+    }
+    
+    private function cleanOptionsNull($customOptions, $oldOptions)
+    {
+        foreach ($customOptions as $key => $value) {
+            if(isset($oldOptions[$key])){
+                if(count($value['options'])==0){
+                    unset($customOptions[$key]);
+                    unset($oldOptions[$key]);
+                }
+            }
+        }
+        $merge = array_merge($customOptions, $oldOptions);
+        return $merge;
     }
 }
