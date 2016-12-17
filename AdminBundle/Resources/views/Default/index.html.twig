@@ -1,4 +1,4 @@
-{% extends "AdminBundle:Base:layout.html.twig" %}
+{% extends core['extended_layout_admin'] ? core['extended_layout_admin'] : 'AdminBundle:Base:layout.html.twig' %}
 
 {% block section %}dashboard{% endblock %}
 

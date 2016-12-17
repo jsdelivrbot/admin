@@ -280,3 +280,11 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .form-group ul#credential-fields-list li{
     overflow: hidden
 }
+.form-control>div{
+    display: inline-block;
+}
+select.form-control{
+    width: auto;
+    display: inline-block;
+}
+    
