@@ -176,7 +176,7 @@ class AdminExtension extends Extension
                         $arr2[$key][$key2] = $menu_item2;
                     }else{
                         foreach ($menu_item2 as $key3 => $menu_item3) {
-                            if(is_array($arr2[$key][$key2][$key3]) && count($arr2[$key][$key2][$key3]) > 0){
+                            if(is_array($arr2[$key][$key2][$key3])){
                                 $customOptions = $arr2[$key][$key2][$key3];
                                 //if we need remove items put values as null
                                 $arr2[$key][$key2][$key3] = $this->cleanOptionsNull($customOptions, $menu_item3);

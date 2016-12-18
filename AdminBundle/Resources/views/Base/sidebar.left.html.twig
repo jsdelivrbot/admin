@@ -17,16 +17,16 @@
       {% if app.user.isGranted('ROLE_ADMIN') %}
         {% set admin_menu =  get_admin_menu() %}
         {% for key, item in admin_menu %}
-            {% if item.label != '' %}
+             {% if item.label != '' %}
             <li class="treeview">
                 <a href="#">
-                  <i class="{{item.icon_class}}"></i> <span>{{ item.label | trans }}</span> <i class="fa fa-angle-left pull-right"></i>
+                  <i class="{{item.icon_class}}"></i> <span>{{ item.label | trans  }}</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                   {% for subkey, subitem in item.options %} 
                       <li id="section-{{subkey}}">
                           {% if subitem.options is defined %}
-                            <a href=""><i class="fa fa-circle-o"></i> {{ subkey | trans }} </a>
+                            <a href=""><i class="fa fa-circle-o"></i> {{ subkey | trans | capitalize }} </a>
                             <ul class="treeview-menu">
                                 {% for subkey2, subitem2 in subitem.options %} 
                                     <li id="section-{{subkey2}}"><a href="{{ path(subitem2) }}"><i class="fa fa-circle-o"></i> {{ subkey2 | trans }}</a></li>
@@ -39,7 +39,7 @@
                   {% endfor %}
                 </ul>
             </li>
-            {% endif %}
+           {% endif %}
         {% endfor %}
       {% endif %}
     </ul>
