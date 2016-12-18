@@ -17,6 +17,7 @@
       {% if app.user.isGranted('ROLE_ADMIN') %}
         {% set admin_menu =  get_admin_menu() %}
         {% for key, item in admin_menu %}
+            {% if item.label != '' %}
             <li class="treeview">
                 <a href="#">
                   <i class="{{item.icon_class}}"></i> <span>{{ item.label | trans }}</span> <i class="fa fa-angle-left pull-right"></i>
@@ -38,6 +39,7 @@
                   {% endfor %}
                 </ul>
             </li>
+            {% endif %}
         {% endfor %}
       {% endif %}
     </ul>

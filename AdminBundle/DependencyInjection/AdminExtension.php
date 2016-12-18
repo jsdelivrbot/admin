@@ -167,25 +167,25 @@ class AdminExtension extends Extension
 
     private function arraymap($arr1, $arr2)
     {
-            foreach ($arr1 as $key => $menu_item) {
-                if(!array_key_exists($key, $arr2)){
-                    $arr2[$key] = $menu_item;
-                }else{
-                    foreach ($menu_item as $key2 => $menu_item2) {
-                        if(!array_key_exists($key2, $arr2[$key])){
-                            $arr2[$key][$key2] = $menu_item2;
-                        }else{
-                            foreach ($menu_item2 as $key3 => $menu_item3) {
-                                if(is_array($arr2[$key][$key2][$key3])){
-                                    $customOptions = $arr2[$key][$key2][$key3];
-                                    //if we need remove items put values as null
-                                    $arr2[$key][$key2][$key3] = $this->cleanOptionsNull($customOptions, $menu_item3);
-                                }
+        foreach ($arr1 as $key => $menu_item) {
+            if(!array_key_exists($key, $arr2)){
+                $arr2[$key] = $menu_item;
+            }else{
+                foreach ($menu_item as $key2 => $menu_item2) {
+                    if(!array_key_exists($key2, $arr2[$key])){
+                        $arr2[$key][$key2] = $menu_item2;
+                    }else{
+                        foreach ($menu_item2 as $key3 => $menu_item3) {
+                            if(is_array($arr2[$key][$key2][$key3]) && count($arr2[$key][$key2][$key3]) > 0){
+                                $customOptions = $arr2[$key][$key2][$key3];
+                                //if we need remove items put values as null
+                                $arr2[$key][$key2][$key3] = $this->cleanOptionsNull($customOptions, $menu_item3);
                             }
                         }
                     }
                 }
             }
+        }
         return $arr2;
     }
     
@@ -202,4 +202,5 @@ class AdminExtension extends Extension
         $merge = array_merge($customOptions, $oldOptions);
         return $merge;
     }
+    
 }
