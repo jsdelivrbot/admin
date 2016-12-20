@@ -65,12 +65,6 @@ class AdminExtension extends Extension
                         'options' => array(
                             'menuitems' => 'core_menuitem_index',
                             'sliders' => 'core_slider_index',
-                            'fonts' => array(
-                                'options' => array(
-                                    'fontadds' => 'core_font_index',
-                                    'fontless' => 'core_font_less',
-                                )
-                            )
                         )
                      ),
                     'user' => array(
@@ -78,18 +72,34 @@ class AdminExtension extends Extension
                         'label' => 'actor.plural',
                         'options' => array(
                             'actors' => 'core_actor_index',
+                            'roles' => 'core_role_index',
                             )
                     ),
-                    'newsletter' => array(
-                        'icon_class' => 'fa fa-envelope-o',
-                        'label' => 'newsletter.plural',
+                    'design.font' => array(
+                        'icon_class' => 'fa fa-paint-brush',
+                        'label' => 'design.font',
                         'options' => array(
-                            'subscriptions' => 'core_newsletter_subscription',
-                            'newsletters' => 'core_newsletter_index',
-                            'shippings' => 'core_newsletter_shipping',
+                            'fontadds' => 'core_font_index',
+                            'fontless' => 'core_font_less',    
                         )
-                    )
-                )
+                     ),
+                    'marketing' => array(
+                        'icon_class' => 'fa fa-line-chart',
+                        'label' => 'marketing',
+                        'options' => array(
+                            'reputation.onlie' => 'core_visit_index',        
+                            'newsletter' => array(
+                                'icon_class' => 'fa fa-envelope-o',
+                                'label' => 'newsletter.plural',
+                                'options' => array(
+                                    'subscriptions' => 'core_newsletter_subscription',
+                                    'newsletters' => 'core_newsletter_index',
+                                    'shippings' => 'core_newsletter_shipping',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
             ),$config);
         }
         if (isset($bundles['AdminBundle'])) {
@@ -107,7 +117,7 @@ class AdminExtension extends Extension
             $config = $this->arraymap(array(
                 'admin_menus' => array(
                     'blog' => array(
-                        'icon_class' => 'fa ion-ios-compose-outline',
+                        'icon_class' => 'fa fa-pencil-square-o',
                         'label' => 'blog.singular',
                         'options' => array(
                             'posts' => 'blog_post_index',
@@ -123,7 +133,7 @@ class AdminExtension extends Extension
             $config = $this->arraymap(array(
                 'admin_menus' => array(
                     'ecommerce' => array(
-                        'icon_class' => 'fa ion-ios-compose-outline',
+                        'icon_class' => 'fa fa-shopping-cart ',
                         'label' => 'ecommerce',
                         'options' => array(
                             'catalogue' => array(
@@ -152,15 +162,34 @@ class AdminExtension extends Extension
                             )
                         )
                     ),
-                    'advert' => array(
-                        'icon_class' => 'fa fa-picture-o',
-                        'label' => 'advert.plural',
+                    'marketing' => array(
                         'options' => array(
-                            'adverts' => 'ecommerce_advert_index',
-                            'advertslocated' => 'ecommerce_located_index',
+                            'advert' => array(
+                                'icon_class' => 'fa fa-picture-o',
+                                'label' => 'advert.plural',
+                                'options' => array(
+                                    'adverts' => 'ecommerce_advert_index',
+                                    'advertslocated' => 'ecommerce_located_index',
+                                )
+                            )
                         )
                     ),
                 )),$config);
+        }
+        if (isset($bundles['ElearningBundle'])) {
+            $config = $this->arraymap(array(
+                'admin_menus' => array(
+                    'elearning' => array(
+                        'icon_class' => 'fa fa-graduation-cap',
+                        'label' => 'elearning',
+                        'options' => array(
+                            'courses' => 'elearning_course_index',
+                            'class' => 'elearning_classes_index',
+                            'tests' => 'elearning_test_index',
+                            )
+                        )
+                    )
+                ),$config);
         }
         return $config;
     }
