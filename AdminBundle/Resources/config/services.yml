@@ -3,7 +3,6 @@ parameters:
   admin_manager.class: "AdminBundle\\Service\\AdminManager"
   upload_handler.class: "AdminBundle\\Service\\UploadHandler"
 
-
 services:
     json_list:
         class: %json_list.class%
