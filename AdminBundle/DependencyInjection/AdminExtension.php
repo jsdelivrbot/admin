@@ -56,6 +56,7 @@ class AdminExtension extends Extension
     {
         $bundles = $container->getParameter('kernel.bundles');
         
+//        print_r($config);die();
         if (isset($bundles['CoreBundle'])) {
             $config = $this->arraymap(array(
                 'admin_menus' => array(
@@ -206,7 +207,7 @@ class AdminExtension extends Extension
                         $arr2[$key][$key2] = $menu_item2;
                     }else{
                         foreach ($menu_item2 as $key3 => $menu_item3) {
-                            if(is_array($arr2[$key][$key2][$key3])){
+                            if(isset($arr2[$key][$key2][$key3]) && is_array($arr2[$key][$key2][$key3])){
                                 $customOptions = $arr2[$key][$key2][$key3];
                                 //if we need remove items put values as null
                                 $arr2[$key][$key2][$key3] = $this->cleanOptionsNull($customOptions, $menu_item3);

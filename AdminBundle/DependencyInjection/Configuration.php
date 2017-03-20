@@ -30,20 +30,32 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->scalarNode('icon_class')->defaultNull()->end()
                             ->scalarNode('label')->defaultNull()->end()
-                            ->arrayNode('options')
-                                ->useAttributeAsKey('name')
-                                ->prototype('array')
-                                    ->ignoreExtraKeys()
-                                    ->children()
-                                        ->scalarNode('icon_class')->defaultNull()->end()
-                                        ->scalarNode('label')->defaultNull()->end()
-                                        ->arrayNode('options')
-                                            ->useAttributeAsKey('name')
-                                            ->prototype('scalar')->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                            ->end()
+                            //fix expected always array
+                            ->variableNode('options')
+                                ->validate()
+                                ->always(function ($v) {
+                                    if (is_string($v) || is_array($v)) {
+                                        return $v;
+                                    }
+                                    throw new InvalidTypeException();
+                                })
+                            ->end()->end()
+                        
+                        
+//                            ->arrayNode('options')
+//                                ->useAttributeAsKey('name')
+//                                ->prototype('array')
+//                                    ->ignoreExtraKeys()
+//                                    ->children()
+//                                        ->scalarNode('icon_class')->defaultNull()->end()
+//                                        ->scalarNode('label')->defaultNull()->end()
+//                                        ->arrayNode('options')
+//                                            ->useAttributeAsKey('name')
+//                                            ->prototype('scalar')->end()
+//                                        ->end()
+//                                    ->end()
+//                                ->end()
+//                            ->end()
                         ->end()
                     ->end()
                 ->end()
