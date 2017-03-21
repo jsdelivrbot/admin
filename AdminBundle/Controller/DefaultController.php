@@ -15,7 +15,7 @@ class DefaultController extends Controller
      *
      * @return Response
      *
-     * @Route("/dataTables.{_format}" , requirements={ "_format" = "json" }, defaults={ "_format" = "json" })
+     * @Route("/admin/dataTables.{_format}" , requirements={ "_format" = "json" }, defaults={ "_format" = "json" })
      * @Method("GET")
      */
     public function getDataTablesI18nAction()
@@ -29,7 +29,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/")
+     * @Route("/admin/")
      * @Template()
      */
     public function indexAction()
@@ -43,7 +43,8 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/dashboard")
+     * @Route("/admin/dashboard")
+     * @Route("/company/dashboard", name="company_default_dashboard")
      * @Template("AdminBundle:Default:index.html.twig")
      */
     public function dashboardAction(Request $request)
@@ -53,7 +54,7 @@ class DefaultController extends Controller
     
     
     /**
-     * @Route("/fileupload")
+     * @Route("/admin/fileupload")
      * @Template("AdminBundle:Default:fileupload.html.twig")
      */
     public function fileuploadAction(Request $request)
@@ -62,7 +63,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/analytics/{id}")
+     * @Route("/admin/analytics/{id}")
      * @Template()
      */
     public function analyticsAction(Request $request, $id=null)

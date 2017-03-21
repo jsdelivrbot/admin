@@ -98,7 +98,11 @@
             <a href="#" class="btn btn-default btn-flat">Profile</a>
           </div>#}
           <div class="pull-right">
-            <a href="{{ path('logout')}}" class="btn btn-default btn-flat">Cerrar sesión</a>
+            {% if app.user.isGranted('ROLE_ADMIN')%}
+                <a href="{{ path('admin_logout')}}" class="btn btn-default btn-flat">{{ 'logout' |trans }}</a>
+            {% else %}
+                <a href="{{ path('company_logout')}}" class="btn btn-default btn-flat">{{ 'logout' |trans }}</a>
+            {% endif %}
           </div>
         </li>
       </ul>

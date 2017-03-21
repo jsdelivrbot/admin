@@ -19,3 +19,10 @@ Login page
 .login-logo a{
     color: #fff!important;
 }
+    
+.login-box-body{
+    overflow: hidden;
+}
+.login-box-body form[name="recovery_email"]{
+    display: none;
+}
