@@ -64,8 +64,8 @@ class AdminExtension extends Extension
                         'icon_class' => 'fa fa-dashboard',
                         'label' => 'dashboard',
                         'options' => array(
-                            'menuitems' => 'core_menuitem_index',
-                            'sliders' => 'core_slider_index',
+                            'menuitems' => 'coreextra_menuitem_index',
+                            'sliders' => 'coreextra_slider_index',
                             'translations' => 'core_translation_index',
                             'parameters' => 'core_parameter_index',
                         )
@@ -82,22 +82,22 @@ class AdminExtension extends Extension
                         'icon_class' => 'fa fa-paint-brush',
                         'label' => 'design.font',
                         'options' => array(
-                            'fontadds' => 'core_font_index',
-                            'fontless' => 'core_font_less',    
+                            'fontadds' => 'coreextra_font_index',
+                            'fontless' => 'coreextra_font_less',    
                         )
                      ),
                     'marketing' => array(
                         'icon_class' => 'fa fa-line-chart',
                         'label' => 'marketing',
                         'options' => array(
-                            'reputation.onlie' => 'core_visit_index',        
+                            'reputation.onlie' => 'coreextra_visit_index',        
                             'newsletter' => array(
                                 'icon_class' => 'fa fa-envelope-o',
                                 'label' => 'newsletter.plural',
                                 'options' => array(
-                                    'subscriptions' => 'core_newsletter_subscription',
-                                    'newsletters' => 'core_newsletter_index',
-                                    'shippings' => 'core_newsletter_shipping',
+                                    'subscriptions' => 'coreextra_newsletter_subscription',
+                                    'newsletters' => 'coreextra_newsletter_index',
+                                    'shippings' => 'coreextra_newsletter_shipping',
                                 ),
                             ),
                         ),
