@@ -66,7 +66,8 @@ class AdminExtension extends Extension
                         'options' => array(
                             'menuitems' => 'core_menuitem_index',
                             'sliders' => 'core_slider_index',
-                            'translations' => 'translation-label_index',
+                            'translations' => 'core_translation_index',
+                            'parameters' => 'core_parameter_index',
                         )
                      ),
                     'user' => array(
