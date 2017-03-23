@@ -1,68 +1,9 @@
 <ul class="nav navbar-nav">
 
-    <!-- Notifications: style can be found in dropdown.less -->
-    <li class="dropdown notifications-menu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-bell-o"></i>
-        {% if get_notification('all') > 0%}<span class="label label-warning">{{get_notification('all')}}</span>{% endif %}
-      </a>
-      <ul class="dropdown-menu">
-        <li class="header">Tienes {{get_notification('all')}} notificación/es</li>
-        <li>
-          <!-- inner menu: contains the actual data -->
-          <ul class="menu">
-                {% set notifications = get_notification('all', false) %}
-                {% for notification in notifications %}
-                    {% if notification.type ==  constant('CoreBundle\\Entity\\Notification::TYPE_NEW_OPTIC') %}
-                    <li>
-                         <a href="{{ path('core_optic_show', {id: notification.detail.optic}) }}">
-                            <i class="fa fa-users text-aqua"></i> 
-                            Nueva optica<br>
-                            <span style="font-size: 10px">Fecha: {{ notification.created | date('d/m/y H:i:s')}}</span>
-                        </a>   
-                    </li>
-                    {%endif %}
-                    {% if notification.type ==  constant('CoreBundle\\Entity\\Notification::TYPE_NEW_PRODUCT') %}
-                    <li>
-                         <a href="{{ path('ecommerce_product_show', {id: notification.detail.product}) }}">
-                            <i class="fa fa-users text-aqua"></i> 
-                            Nueva producto<br>
-                            <span style="font-size: 10px">Fecha: {{ notification.created | date('d/m/y H:i:s')}}</span>
-                        </a>   
-                    </li>
-                    {%endif %}
-                    {% if notification.type ==  constant('CoreBundle\\Entity\\Notification::TYPE_ADD_PRODUCT') %}
-                    <li>
-                         <a href="{{ path('ecommerce_product_new') }}">
-                            <i class="fa fa-plus text-fuchsia"></i> 
-                            Animate! agrega un producto<br>
-                            <span style="font-size: 10px">Fecha: {{ notification.created | date('d/m/y H:i:s')}}</span>
-                        </a>   
-                    </li>
-                    {%endif %}
-                    {% if notification.type ==  constant('CoreBundle\\Entity\\Notification::TYPE_ADD_WEB') %}
-                    <li>
-                         <a href="{{ path('core_optic_show', {id: notification.detail.optic}) }}?web=1">
-                            <i class="fa fa-plus text-green"></i> 
-                            Animate! agrega una web<br>
-                            <span style="font-size: 10px">Fecha: {{ notification.created | date('d/m/y H:i:s')}}</span>
-                        </a>   
-                    </li>
-                    {%endif %}
-                    {% if notification.type ==  constant('CoreBundle\\Entity\\Notification::TYPE_MOST_VISITED') %}
-                    <li>
-                         <a href="{{ path('core_optic_show', {id: notification.detail.optic}) }}?info=1">
-                            <i class="fa fa-plus text-orange"></i> 
-                            Estas siendo muy visitado<br>
-                            <span style="font-size: 10px">Fecha: {{ notification.created | date('d/m/y H:i:s')}}</span>
-                        </a>   
-                    </li>
-                    {%endif %}
-                {% endfor %}
-          </ul>
-        </li>
-      </ul>
-    </li>
+    
+    {% if twig_global.checkUse('CoreExtraBundle')%}
+        {% include 'CoreExtraBundle:Notification:navbar.top.html.twig' %}
+    {% endif %}
                
     
     <!-- User Account: style can be found in dropdown.less -->
