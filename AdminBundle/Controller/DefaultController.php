@@ -15,7 +15,7 @@ class DefaultController extends Controller
      *
      * @return Response
      *
-     * @Route("/admin/dataTables.{_format}" , requirements={ "_format" = "json" }, defaults={ "_format" = "json" })
+     * @Route("/dataTables.{_format}" , requirements={ "_format" = "json" }, defaults={ "_format" = "json" })
      * @Method("GET")
      */
     public function getDataTablesI18nAction()
