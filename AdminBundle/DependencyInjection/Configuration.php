@@ -59,6 +59,27 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('company_menus')
+                    ->isRequired()
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->ignoreExtraKeys()
+                        ->children()
+                            ->scalarNode('icon_class')->defaultNull()->end()
+                            ->scalarNode('label')->defaultNull()->end()
+                            //fix expected always array
+                            ->variableNode('options')
+                                ->validate()
+                                ->always(function ($v) {
+                                    if (is_string($v) || is_array($v)) {
+                                        return $v;
+                                    }
+                                    throw new InvalidTypeException();
+                                })
+                            ->end()->end()
+                        ->end()
+                    ->end()
+                ->end()
                 ->arrayNode('apis')
                     ->isRequired()
                     ->useAttributeAsKey('name')

@@ -287,3 +287,7 @@ select.form-control{
     width: auto;
     display: inline-block;
 }
+.btn-plus{
+    margin-top: -4px;
+    margin-left: 10px;
+}

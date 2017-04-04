@@ -1,6 +1,6 @@
 {% extends 'form_div_layout.html.twig' %}
 
-{% block integer_widget %}
+{#% block integer_widget %}
 {% spaceless %}
     {% set attr = attr|merge({class: 'm-wrap small'}) %}
     {{ parent() }}
@@ -31,25 +31,7 @@
 {% endspaceless %}
 {% endblock textarea_widget %}
 
-{% block form_row %}
-{% spaceless %}    
-    <div class="form-group {{ div_class|default }}">
-        {{ form_label(form, null, { label_attr: {class: 'col-sm-2 control-label'} }) }}
-            <div class="{% if plus is defined %}col-sm-9{% else %}col-sm-10{% endif %}">
-                {{ form_widget(form, { attr: {class: class|default('form-control')} }) }}
-                {{ form_errors(form) }}
-            </div>
-        {% if plus is defined %}
-            <div class="col-sm-1">
-                <!-- Button trigger modal -->
-                <button style="margin-left: -17px;" type="button" class="btn btn-success btn-flat" data-toggle="modal" data-target="#myModal">
-                  <i class="fa fa-plus"></i> Nuevo
-                </button>
-            </div>
-        {% endif %}
-    </div>
-{% endspaceless %}
-{% endblock form_row %}
+
 
 {% block file_widget %}
 {% spaceless %}
@@ -81,4 +63,24 @@
     </div>
     {% endif %}
 {% endspaceless %}
-{% endblock file_widget %}
+{% endblock file_widget %#}
+
+{% block form_row %}
+{% spaceless %}    
+    <div class="form-group {{ div_class|default }}">
+        {{ form_label(form, null, { label_attr: {class: 'col-sm-2 control-label'} }) }}
+            <div class="{% if plus is defined %}col-sm-9{% else %}col-sm-10{% endif %}">
+                {{ form_widget(form, { attr: {class: class|default('form-control')} }) }}
+                {{ form_errors(form) }}
+            </div>
+        {% if plus is defined %}
+            <div class="col-sm-1">
+                <!-- Button trigger modal -->
+                <button style="margin-left: -17px;" type="button" class="btn btn-success btn-flat" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-plus"></i> Nuevo
+                </button>
+            </div>
+        {% endif %}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}

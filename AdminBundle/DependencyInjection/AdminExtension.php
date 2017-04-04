@@ -26,6 +26,10 @@ class AdminExtension extends Extension
         $configs = $this->addMenuItemsByBundles($container, $config);
         $container->setParameter('core.admin_menus', $configs);
         
+        //company menu
+        if(isset($config['company_menus']))
+        $container->setParameter('core.company_menus', $config['company_menus']);
+        
         //google analytics
         if (isset($config['apis']['google_analytics']['options']['application_name'])) {
             $container->setParameter('google_analytics.application_name', $config['apis']['google_analytics']['options']['application_name']);
@@ -194,6 +198,16 @@ class AdminExtension extends Extension
                     )
                 ),$config);
         }
+        return $config;
+    }
+
+    
+    private function addCompanyMenuItems($container, $config)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        
+        print_r($config);die();
+   
         return $config;
     }
 
