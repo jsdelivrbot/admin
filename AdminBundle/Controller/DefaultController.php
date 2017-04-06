@@ -44,7 +44,6 @@ class DefaultController extends Controller
     
     /**
      * @Route("/admin/dashboard")
-     * @Route("/company/dashboard", name="company_default_dashboard")
      * @Template("AdminBundle:Default:index.html.twig")
      */
     public function dashboardAction(Request $request)
