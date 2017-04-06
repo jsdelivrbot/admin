@@ -14,7 +14,7 @@
     <ul class="sidebar-menu">
       <li class="header">MENU PRINCIPAL</li>
       
-      {% if app.user.isGranted('ROLE_ADMIN') %}
+      {% if app.user.isGranted('ROLE_SUPER_ADMIN') or app.user.isGranted('ROLE_ADMIN') %}
         {% set admin_menu =  get_admin_menu() %}
         {% for key, item in admin_menu %}
              {% if item.label != '' %}
