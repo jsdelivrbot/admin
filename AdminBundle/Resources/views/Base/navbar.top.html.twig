@@ -1,5 +1,11 @@
 <ul class="nav navbar-nav">
 
+    {% if is_granted('ROLE_PREVIOUS_ADMIN') %} 
+        <li>
+            <a class="label label-danger" href="{{ path('latinotype_company_index', {'_switch_user': '_exit'}) }}">{{ 'impersonate.exit' }}</a>
+        </li>
+    {% endif %}
+    
     {% if twig_global.checkUse('CoreExtraBundle') or core.notification_navbar_template != 'CoreExtraBundle:Notification:navbar.top.html.twig' %}
         {% include core.notification_navbar_template %}
     {% endif %} 
