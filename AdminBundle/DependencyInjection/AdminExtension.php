@@ -89,14 +89,14 @@ class AdminExtension extends Extension
                         'icon_class' => 'fa fa-line-chart',
                         'label' => 'marketing',
                         'options' => array(
-                            'reputation.onlie' => 'core_visit_index',        
+                            'reputation.onlie' => 'coreextra_visit_index',        
                             'newsletter' => array(
                                 'icon_class' => 'fa fa-envelope-o',
                                 'label' => 'newsletter.plural',
                                 'options' => array(
-                                    'subscriptions' => 'core_newsletter_subscription',
-                                    'newsletters' => 'core_newsletter_index',
-                                    'shippings' => 'core_newsletter_shipping',
+                                    'subscriptions' => 'coreextra_newsletter_subscription',
+                                    'newsletters' => 'coreextra_newsletter_index',
+                                    'shippings' => 'coreextra_newsletter_shipping',
                                 ),
                             ),
                         ),
