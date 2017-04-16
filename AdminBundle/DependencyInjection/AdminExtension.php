@@ -56,7 +56,6 @@ class AdminExtension extends Extension
     {
         $bundles = $container->getParameter('kernel.bundles');
         
-//        print_r($config);die();
         if (isset($bundles['CoreBundle'])) {
             $config = $this->arraymap(array(
                 'admin_menus' => array(
@@ -64,10 +63,18 @@ class AdminExtension extends Extension
                         'icon_class' => 'fa fa-dashboard',
                         'label' => 'dashboard',
                         'options' => array(
-                            'menuitems' => 'core_menuitem_index',
-                            'sliders' => 'core_slider_index',
+                            'menuitems' => 'coreextra_menuitem_index',
+                            'sliders' => 'coreextra_slider_index',
                             'translations' => 'core_translation_index',
                             'parameters' => 'core_parameter_index',
+                            'design.font' => array(
+                                'icon_class' => 'fa fa-paint-brush',
+                                'label' => 'design.font',
+                                'options' => array(
+                                    'fontadds' => 'coreextra_font_index',
+                                    'fontless' => 'coreextra_font_less',    
+                                )
+                             ),
                         )
                      ),
                     'user' => array(
@@ -78,14 +85,6 @@ class AdminExtension extends Extension
                             'roles' => 'core_role_index',
                             )
                     ),
-                    'design.font' => array(
-                        'icon_class' => 'fa fa-paint-brush',
-                        'label' => 'design.font',
-                        'options' => array(
-                            'fontadds' => 'core_font_index',
-                            'fontless' => 'core_font_less',    
-                        )
-                     ),
                     'marketing' => array(
                         'icon_class' => 'fa fa-line-chart',
                         'label' => 'marketing',
@@ -110,6 +109,7 @@ class AdminExtension extends Extension
                 'admin_menus' => array(
                     'dashboard' => array(
                         'options' => array(
+                            'stats' => 'admin_default_dashboard',
                             'analytics' => 'admin_default_analytics'
                             )
                         )
