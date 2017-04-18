@@ -287,3 +287,13 @@ select.form-control{
     width: auto;
     display: inline-block;
 }
+<<<<<<< Updated upstream
+=======
+.btn-plus{
+    margin-top: -4px;
+    margin-left: 10px;
+}
+.modal .form-horizontal .control-label{
+    padding: 10px 0 0 0;
+}
+>>>>>>> Stashed changes
