@@ -15,7 +15,7 @@ class DefaultController extends Controller
      *
      * @return Response
      *
-     * @Route("/admin/dataTables.{_format}" , requirements={ "_format" = "json" }, defaults={ "_format" = "json" })
+     * @Route("/dataTables.{_format}" , requirements={ "_format" = "json" }, defaults={ "_format" = "json" })
      * @Method("GET")
      */
     public function getDataTablesI18nAction()
@@ -44,7 +44,6 @@ class DefaultController extends Controller
     
     /**
      * @Route("/admin/dashboard")
-     * @Route("/company/dashboard", name="company_default_dashboard")
      * @Template("AdminBundle:Default:index.html.twig")
      */
     public function dashboardAction(Request $request)
