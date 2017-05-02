@@ -67,18 +67,8 @@ class AdminExtension extends Extension
                         'icon_class' => 'fa fa-dashboard',
                         'label' => 'dashboard',
                         'options' => array(
-                            'menuitems' => 'coreextra_menuitem_index',
-                            'sliders' => 'coreextra_slider_index',
                             'translations' => 'core_translation_index',
                             'parameters' => 'core_parameter_index',
-                            'design.font' => array(
-                                'icon_class' => 'fa fa-paint-brush',
-                                'label' => 'design.font',
-                                'options' => array(
-                                    'fontadds' => 'coreextra_font_index',
-                                    'fontless' => 'coreextra_font_less',    
-                                )
-                             ),
                         )
                      ),
                     'user' => array(
@@ -89,6 +79,28 @@ class AdminExtension extends Extension
                             'roles' => 'core_role_index',
                             )
                     ),
+                ),
+            ),$config);
+        }
+        if (isset($bundles['CoreExtraBundle'])) {
+            $config = $this->arraymap(array(
+                'admin_menus' => array(
+                    'dashboard' => array(
+                        'icon_class' => 'fa fa-dashboard',
+                        'label' => 'dashboard',
+                        'options' => array(
+                            'menuitems' => 'coreextra_menuitem_index',
+                            'sliders' => 'coreextra_slider_index',
+                            'design.font' => array(
+                                'icon_class' => 'fa fa-paint-brush',
+                                'label' => 'design.font',
+                                'options' => array(
+                                    'fontadds' => 'coreextra_font_index',
+                                    'fontless' => 'coreextra_font_less',    
+                                )
+                             ),
+                        )
+                     ),
                     'marketing' => array(
                         'icon_class' => 'fa fa-line-chart',
                         'label' => 'marketing',
