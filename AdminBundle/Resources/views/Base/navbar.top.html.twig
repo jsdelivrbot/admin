@@ -6,8 +6,8 @@
         </li>
     {% endif %}
     
-    {% if twig_global.checkUse('CoreExtraBundle') or core.notification_navbar_template != 'CoreExtraBundle:Notification:navbar.top.html.twig' %}
-        {% include core.notification_navbar_template %}
+    {% if twig_global.checkUse('CoreExtraBundle') or twig_global.getParameter('notification_navbar_template') != 'CoreExtraBundle:Notification:navbar.top.html.twig' %}
+        {% include twig_global.getParameter('notification_navbar_template') %}
     {% endif %} 
                
     
