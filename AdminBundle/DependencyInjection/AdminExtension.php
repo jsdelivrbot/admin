@@ -71,7 +71,7 @@ class AdminExtension extends Extension
                             'parameters' => 'core_parameter_index',
                         )
                      ),
-                    'user' => array(
+                    'users' => array(
                         'icon_class' => 'fa fa-users',
                         'label' => 'actor.plural',
                         'options' => array(

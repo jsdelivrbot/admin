@@ -28,9 +28,9 @@
                   <a href="/admin/login"><b>{{ core.name }}</b></a>
                 </div><!-- /.login-logo -->
                 <div class="login-box-body">
-                    <p class="login-box-msg">Inicia sesion para entrar al admin</p>
-                    
-                     {% if error is defined and error %}
+                    <p class="login-box-msg">{{ 'login.header' | trans }}</p>
+
+                    {% if error is defined and error %}
                         <div>{{ error.message }}</div>
                      {% endif %}
                 
