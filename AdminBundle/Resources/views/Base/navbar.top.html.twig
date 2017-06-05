@@ -44,7 +44,7 @@
             <a href="#" class="btn btn-default btn-flat">Profile</a>
           </div>#}
           <div class="pull-right">
-            {% if app.user.isGranted('ROLE_ADMIN') or app.user.isGranted('SUPER_ROLE_ADMIN')%}
+            {% if app.user.isGranted('ROLE_ADMIN') or app.user.isGranted('ROLE_SUPER_ADMIN')%}
                 <a href="{{ path('admin_logout')}}" class="btn btn-default btn-flat">{{ 'logout' |trans }}</a>
             {% else %}
                 <a href="{{ path('company_logout')}}" class="btn btn-default btn-flat">{{ 'logout' |trans }}</a>
