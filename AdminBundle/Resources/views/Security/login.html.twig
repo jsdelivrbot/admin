@@ -1,124 +1,117 @@
-<html>
+{% extends twig_global.getParameter('extended_layout_admin')  %}
+   
+{% block stylesheets %}
+    {{ parent() }}
     
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}{{ core['name']}} - Admin{% endblock %}</title>
-
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        {% block stylesheets %}
-            {% stylesheets
-                'bundles/admin/bootstrap/css/bootstrap.min.css' 
-                'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
-                'bundles/admin/css/AdminLTE.min.css'
-                'bundles/admin/plugins/iCheck/square/blue.css' 
-                'bundles/admin/css/login.css'
-                filter='cssrewrite' %}
-                <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
-            {% endstylesheets %}
+    {% stylesheets
+        'bundles/admin/css/login.css'
+        filter='cssrewrite' %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}          
             
-        {% endblock %}
-    </head>
+ {% block body %}
+     <body class="login">
+         
+        <div class="login-box">
+           <div class="login-logo">
+             <a href="/admin/login"><b>{{ core.name }}</b></a>
+           </div><!-- /.login-logo -->
+           <div class="login-box-body">
+               <p class="login-box-msg">{{ 'login.header' | trans }}</p>
+
+               {{ include ('CoreBundle:Base:alert.messages.html.twig') }}
+               {% if error is defined and error %}
+                   <div>{{ error.message }}</div>
+                {% endif %}
+
+                <form id="admin-login" action="{{ path('admin_login_check') }}" method="post">
+                 <div class="form-group has-feedback">
+                   <input type="text" class="form-control" placeholder="Email" name="_username" id="_username" />
+                   <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                 </div>
+                 <div class="form-group has-feedback">
+                   <input type="password" class="form-control" placeholder="Password" name="_password" id="_password"/>
+                   <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                 </div>
+
+                 <div class="row">
+                     <div class="form-group added">
+                       <div class="col-md-6">
+                           {#<input type="checkbox" class="{%if params.icheck_class is defined and params.icheck_class !=''%}{{params.icheck_class}}{% else %}minimal{% endif %}" value=""> {{ 'login.remember' | trans }}#}
+                           <a  href="#" id="show-recovery-form" title="{{ 'login.recovery' | trans }}">{{ 'login.recovery' | trans }}</a>
+                       </div>
+                       <div class="col-md-6">  
+                           <button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'login.short' | trans }}</button>
+                       </div>   
+                   </div>
+                 </div>
+               </form>
+
+               {{ recovery_form()}}                 
+
+             </div><!-- /.login-box-body -->
+        </div><!-- /.login-box -->
     
-    <body class="login">
-        <body class="login-page">
-            <div class="login-box">
-                <div class="login-logo">
-                  <a href="/admin/login"><b>{{ core.name }}</b></a>
-                </div><!-- /.login-logo -->
-                <div class="login-box-body">
-                    <p class="login-box-msg">{{ 'login.header' | trans }}</p>
-
-                    {% if error is defined and error %}
-                        <div>{{ error.message }}</div>
-                     {% endif %}
-                
-                     <form id="admin-login" action="{{ path('admin_login_check') }}" method="post">
-                      <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="Email" name="_username" id="_username" />
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                      </div>
-                      <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Password" name="_password" id="_password"/>
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                      </div>
-    
-                      <div class="row">
-                          <div class="form-group added">
-                            <div class="col-md-6">
-                                {#<input type="checkbox" class="{%if params.icheck_class is defined and params.icheck_class !=''%}{{params.icheck_class}}{% else %}minimal{% endif %}" value=""> {{ 'login.remember' | trans }}#}
-                                <a  href="#" id="show-recovery-form" title="{{ 'login.recovery' | trans }}">{{ 'login.recovery' | trans }}</a>
-                            </div>
-                            <div class="col-md-6">  
-                                <button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'login.short' | trans }}</button>
-                            </div>   
-                        </div>
-                      </div>
-                    </form>
-
-                    {{ recovery_form()}}                 
-                        
-                  </div><!-- /.login-box-body -->
-            </div><!-- /.login-box -->
- 
-       
-        {% block javascripts %}
-            {% javascripts 
-                'bundles/admin/plugins/jQuery/jQuery-2.1.4.min.js'
-                'bundles/admin/bootstrap/js/bootstrap.min.js'
-                'bundles/admin/plugins/iCheck/icheck.min.js'
-                 %}
-                <script type="text/javascript" src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-
-
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    
-                    $('#show-recovery-form').click(function(){
-                        $('form[name="recovery_email"]').slideToggle('slow');
-                    });
-                    
-                    $('form[name="recovery_email"]').submit(function(e){
-                        e.preventDefault();
-                        var email = $('#recovery_email_email').val();
-
-                        if(email != ''){
-                            $.ajax({
-                                type: "POST",
-                                url: "{{ path('core_baseactor_recoverypassword') }}/"+email,
-                              }).done(function( data ) {
-                                $('#returnMessage').show();
-                                if($('#returnMessage div').length == 0){
-                                    var html = '<div class="alert alert-recovery-password"><button type="button" class="close" data-dismiss="alert">×</button><strong></strong></div>';
-                                    $('#returnMessage').html(html);
-                                }
-
-                                $('#returnMessage div strong').text(data.answer.message);
-                                if(data.answer.status == 'success'){
-                                    $('#returnMessage div').removeClass('alert-warning');
-                                    $('#returnMessage div').addClass('alert-success');
-                                }
-                                if(data.answer.status == 'error'){
-                                    $('#returnMessage div').removeClass('alert-success');
-                                    $('#returnMessage div').addClass('alert-warning');
-                                }
-                              });
-                        }
-                    });
-                });
-    
-                
-                
-              $(function () {
-                $('input').iCheck({
-                  checkboxClass: 'icheckbox_square-blue',
-                  radioClass: 'iradio_square-blue',
-                  increaseArea: '20%' // optional
-                });
-              });
-            </script>
-        {% endblock %}
     </body>
-</html>
+    {% block javascripts %}
+        {% javascripts 
+            'bundles/admin/plugins/jQuery/jQuery-2.1.4.min.js'
+            'bundles/admin/bootstrap/js/bootstrap.min.js'
+            'bundles/admin/plugins/iCheck/icheck.min.js'
+             %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                $('#show-recovery-form').click(function(){
+                    $('form[name="recovery_email"]').slideToggle('slow');
+                });
+
+                $('form[name="recovery_email"]').submit(function(e){
+                    e.preventDefault();
+                    var email = $('#recovery_email_email').val();
+
+                    if(email != ''){
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ path('core_baseactor_recoverypassword') }}/"+email,
+                          }).done(function( data ) {
+                            $('#returnMessage').show();
+                            if($('#returnMessage div').length == 0){
+                                var html = '<div class="alert alert-recovery-password"><button type="button" class="close" data-dismiss="alert">×</button><strong></strong></div>';
+                                $('#returnMessage').html(html);
+                            }
+
+                            $('#returnMessage div strong').text(data.answer.message);
+                            if(data.answer.status == 'success'){
+                                $('#returnMessage div').removeClass('alert-warning');
+                                $('#returnMessage div').addClass('alert-success');
+                            }
+                            if(data.answer.status == 'error'){
+                                $('#returnMessage div').removeClass('alert-success');
+                                $('#returnMessage div').addClass('alert-warning');
+                            }
+                          });
+                    }
+                });
+            });
+
+
+
+          $(function () {
+            $('input').iCheck({
+              checkboxClass: 'icheckbox_square-blue',
+              radioClass: 'iradio_square-blue',
+              increaseArea: '20%' // optional
+            });
+          });
+        </script>
+    {% endblock %}
+
+
+ {% endblock %}
+       
