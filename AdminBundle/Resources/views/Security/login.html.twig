@@ -22,7 +22,7 @@
 
                {{ include ('CoreBundle:Base:alert.messages.html.twig') }}
                {% if error is defined and error %}
-                   <div>{{ error.message }}</div>
+                   <div class="alert alert-danger">{{ error.message }}</div>
                 {% endif %}
 
                 <form id="admin-login" action="{{ path('admin_login_check') }}" method="post">
