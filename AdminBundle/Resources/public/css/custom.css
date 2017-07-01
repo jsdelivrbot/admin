@@ -86,14 +86,17 @@ input[type="file"] {
   height: 30px;
   line-height: 30px;
 }
+.fileinput-button{
+    position: relative;
+}
 .fileinput-button input {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     margin: 0;
     opacity: 0;
     filter: alpha(opacity=0);
-    transform: translate(-513px, 0px) scale(1);
+    /*transform: translate(-513px, 0px) scale(1);*/
     width: 103px;
     font-size: 23px;
     direction: ltr;
