@@ -69,6 +69,7 @@ class AdminExtension extends Extension
                         'options' => array(
                             'translations' => 'core_translation_index',
                             'parameters' => 'core_parameter_index',
+                            'pages' => 'core_page_index'
                         )
                      ),
                     'users' => array(
