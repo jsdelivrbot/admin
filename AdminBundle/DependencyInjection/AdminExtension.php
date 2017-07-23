@@ -211,6 +211,35 @@ class AdminExtension extends Extension
                     )
                 ),$config);
         }
+        
+        if (isset($bundles['PaymentBundle'])) {
+            $config = $this->arraymap(array(
+                'admin_menus' => array(
+                    'ecommerce' => array(
+                        'icon_class' => 'fa fa-shopping-cart ',
+                        'label' => 'ecommerce',
+                        'options' => array(
+                            'sales' => array(
+                                'options' => array(
+                                    'transactions' => 'payment_transaction_index',
+                                    'invoices' => 'payment_invoice_index',
+                                    //'taxes' => 'payment_tax_index',
+                                    'paymentserviceproviders' => 'payment_paymentserviceprovider_index',
+                                    'carts' => 'payment_cart_index'
+                                )
+                            ),
+//                            'recurrings' => array(
+//                                'options' => array(
+//                                    'contracts' => 'ecommerce_contract_index',
+//                                    'plans' => 'ecommerce_plan_index',
+//                                )
+//                            )
+                        )
+                    ),
+                )),$config);
+        }
+        
+        
         return $config;
     }
 
