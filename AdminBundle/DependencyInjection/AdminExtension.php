@@ -239,6 +239,24 @@ class AdminExtension extends Extension
                 )),$config);
         }
         
+        if (isset($bundles['CatalogueBundle'])) {
+            $config = $this->arraymap(array(
+                'admin_menus' => array(
+                    'catalogue' => array(
+                        'icon_class' => 'fa fa-book ',
+                        'label' => 'catalogue',
+                        'options' => array(
+                            'products' => 'catalogue_product_index',
+                            'categories' => 'catalogue_category_index',
+                            'features' => 'catalogue_feature_index',
+                            'attributes' => 'catalogue_attribute_index',
+                            'brands' => 'catalogue_brand_index',
+                            'models' => 'catalogue_brandmodel_index',
+                        )
+                    ),
+                )),$config);
+        }
+        
         
         return $config;
     }
