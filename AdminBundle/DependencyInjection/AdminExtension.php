@@ -247,7 +247,7 @@ class AdminExtension extends Extension
                         'label' => 'catalogue',
                         'options' => array(
                             'products' => 'catalogue_product_index',
-                            'categories' => 'catalogue_category_index',
+                            'cataloguecategories' => 'catalogue_category_index',
                             'features' => 'catalogue_feature_index',
                             'attributes' => 'catalogue_attribute_index',
                             'brands' => 'catalogue_brand_index',
