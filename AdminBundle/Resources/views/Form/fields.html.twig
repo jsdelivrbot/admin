@@ -61,7 +61,7 @@
             <img src="https://placeholdit.imgix.net/~text?txtsize=22&bg=efefef&txtclr=aaaaaa&w=200&h=150&txt={% if small is defined and small != ''%}{{ small | default }}{% else %}{{ 'image.select' | trans }}{% endif %}" alt="" />
         </div>
         <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
-            {% if image is defined and image != ''%} <img src="/uploads/images/{{ image|default }}" />{% endif %}
+            {% if image is defined and image != ''%} <img src="{{ image|default }}" />{% endif %}
         </div>
         <div>
            <span class="btn btn-file">
