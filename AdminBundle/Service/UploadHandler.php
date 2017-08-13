@@ -983,7 +983,7 @@ class UploadHandler
                 /** @var Image $image */
                 if($this->options['entity_path'] == 'BlogBundle:Post') {
                     $image = new PostImage();
-                }elseif($this->options['entity_path'] == 'EcommerceBundle:Product'){
+                }elseif($this->options['entity_path'] == 'CatalogueBundle:Product'){
                     $image = new ProductImage();
                 }
                 $image->setPath('/uploads/images/'.$this->options['type'].'/'.$entity->getId().'/'.$files[$index]->name);
