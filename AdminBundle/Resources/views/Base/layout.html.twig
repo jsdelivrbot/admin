@@ -185,6 +185,25 @@
         
         <script>
             
+            function visible(id, path){
+                $.ajax({
+                    url: path,
+                    method: "POST",
+                    data: { id: id }
+                }).done(function(response) {
+                    if(response.visible){
+                        $('#'+response.id+'-v').removeClass('fa-circle-o');
+                        $('#'+response.id+'-v').addClass('fa-check-circle-o');
+                        $('#'+response.id+'-v').css('color', '#00a65a');
+                    }else{
+                        $('#'+response.id+'-v').removeClass('fa-check-circle-o');
+                        $('#'+response.id+'-v').addClass('fa-circle-o');
+                        $('#'+response.id+'-v').css('color', '#dd4b39');
+                    }
+                });
+            }
+            
+            
             function activate(id, path){
                 $.ajax({
                     url: path,

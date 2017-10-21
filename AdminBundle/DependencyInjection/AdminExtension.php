@@ -257,6 +257,23 @@ class AdminExtension extends Extension
                 )),$config);
         }
         
+        if (isset($bundles['TicketBundle'])) {
+            $config = $this->arraymap(array(
+                'admin_menus' => array(
+                    'ticketing' => array(
+                        'icon_class' => 'fa fa-ticket  ',
+                        'label' => 'ticketing',
+                        'options' => array(
+                            'events' => 'ticket_event_index',
+                            'places' => 'ticket_place_index',
+                            'halls' => 'ticket_hall_index',
+                            'schemes' => 'ticket_scheme_index',
+                            'shows' => 'ticket_show_index',
+                            'tickets' => 'ticket_ticket_index',
+                        )
+                    ),
+                )),$config);
+        }
         
         return $config;
     }
