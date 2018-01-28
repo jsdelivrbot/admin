@@ -4,7 +4,7 @@
     "description": "AdminLTE integration for sandbox",
     "keywords": ["admin"],
     "homepage": "https://github.com/sebardo/admin",
-    "license": "GNU",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Dario Sebastian Sasturain",
@@ -15,8 +15,8 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "sebardo/core": "dev-master",
-        "google/apiclient": "@beta"
+        "sebardo/core": "~0.1",
+        "google/apiclient": "~2.2.1"
     },
     "autoload": {
         "psr-4": {"AdminBundle\\": "AdminBundle"}
